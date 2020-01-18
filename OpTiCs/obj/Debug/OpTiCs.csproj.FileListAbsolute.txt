@@ -36,3 +36,13 @@ E:\OpTiCs\OpTiCs\obj\Debug\OpTiCs.csproj.GenerateResource.cache
 E:\OpTiCs\OpTiCs\obj\Debug\OpTiCs.csproj.CoreCompileInputs.cache
 E:\OpTiCs\OpTiCs\obj\Debug\OpTiCs.exe
 E:\OpTiCs\OpTiCs\obj\Debug\OpTiCs.pdb
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.csprojAssemblyReference.cache
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.Form1.resources
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.Properties.Resources.resources
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.csproj.GenerateResource.cache
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.csproj.CoreCompileInputs.cache
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.exe
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\obj\Debug\OpTiCs.pdb
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\bin\Debug\OpTiCs.exe.config
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\bin\Debug\OpTiCs.exe
+E:\Master - Carleton University\Thesis\Clustering\OpTiCs\OpTiCs\bin\Debug\OpTiCs.pdb

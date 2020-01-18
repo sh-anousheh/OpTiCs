@@ -20,22 +20,22 @@ namespace OpTiCs
         static double secondEps;
         static int RowNum;
         static int ColNum;
-        int[,] A;
+        List<List<double>> A;
         class Object
         {
+            private List<double> _coordinates;
+            public List<double> Coordinates
+            {
+                get { return _coordinates; }
+            }
             public int Name;
-            public double B;
-            public double G;
-            public double R;
             public bool Processed = false;
             public double reachability_distance = -1; //UNDEFINED
             public double core_distance = -1; //UNDEFINED
             public int ClusterId;
-            public Object(double _B, double _G, double _R, int _Name)
+            public Object(List<double> coordinates, int _Name)
             {
-                B = _B;
-                G = _G;
-                R = _R;
+                _coordinates = coordinates;
                 Name = _Name;
             }
         }
@@ -43,7 +43,7 @@ namespace OpTiCs
         {
         }
         #region Read Exel
-        static int[,] Read(string S)
+        static List<List<double>> Read(string S)
         {
             string d = Directory.GetCurrentDirectory(); //Copy the exel file in Debug folder
             Microsoft.Office.Interop.Excel.Application _excelApp = new Microsoft.Office.Interop.Excel.Application();
@@ -60,33 +60,45 @@ namespace OpTiCs
                         XlRangeValueDataType.xlRangeValueDefault);
             RowNum = valueArray.GetLength(0);
             ColNum = valueArray.GetLength(1);
-            string[] ar = new string[RowNum + 1];
-            for (int i = 1; i <= RowNum; i++)
-                ar[i] = (valueArray[i, 1].ToString());
-            string[][] ar1 = new string[RowNum + 1][];
-            for (int i = 1; i <= RowNum; i++)
+
+            List<List<double>> res = new List<List<double>>();
+
+            for (int i = 0; i < RowNum; i++)
             {
-                string v = ar[i];
-                ar1[i] = v.Split(',');
+
+                res.Add(new List<double>());
+
+                for (int j = 0; j < ColNum; j++)
+                {
+
+                    res[i].Add(double.Parse(valueArray[i + 1, j + 1].ToString()));
+
+                }
             }
-            int[,] arr = new int[RowNum + 1, 4];
-            for (int i = 1; i <= RowNum; i++)
-                for (int j = 0; j < 3; j++)
-                    arr[i, j + 1] = int.Parse(ar1[i][j]);
+
             try { workbook.Close(false, Type.Missing, Type.Missing); }
             catch { }
             try { _excelApp.Quit(); }
             catch { }
-            return arr;
+            return res;
         }
         #endregion
         static double Dist(Object o1, Object o2)
         {
-            double dR = o2.R - o1.R;
-            double dG = o2.G - o1.G;
-            double dB = o2.B - o1.B;
-            double dist = Math.Sqrt(dR * dR + dG * dG + dB * dB);
-            return dist;
+            double sumOfSquers = 0;
+
+            for (int i = 0; i < o1.Coordinates.Count; i++)
+            {
+
+                double dif = o1.Coordinates[i] - o2.Coordinates[i];
+
+                sumOfSquers += dif * dif;
+
+            }
+
+            double res = Math.Sqrt(sumOfSquers);
+
+            return res;
         }
         static setOfObjects NeighborQuery(setOfObjects SetOfObjects, Object Object)
         {
@@ -190,7 +202,7 @@ namespace OpTiCs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            A = Read("\\HW2_data.xlsx");
+            A = Read("\\stp.xls");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -203,8 +215,8 @@ namespace OpTiCs
             Eps = Convert.ToDouble(textBox2.Text);
             secondEps = Convert.ToDouble(textBox3.Text);
             setOfObjects SetOfObjects = new setOfObjects();
-            for (int i = 1; i <= RowNum; i++)
-                SetOfObjects.Add(new Object(A[i, 1]/255.0, A[i, 2]/255.0, A[i, 3]/255.0, i));
+            for (int i = 0; i < RowNum; i++)
+                SetOfObjects.Add(new Object(A[i], i));
             setOfObjects OrderedFile = new setOfObjects();
             for (int i = 0; i < SetOfObjects.Count; i++)
             {
