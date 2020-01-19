@@ -202,7 +202,13 @@ namespace OpTiCs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            A = Read("\\stp.xls");
+            //   A = Read("\\stp.xls");
+
+
+            A = Read("\\SparkData\\spark1.xls");
+
+            //  A = Read("\\SparkData\\spark - multi - user - 171020_2251_UC1_3USERS_8ITER_CANDIDATER - merged - series.xls");
+
         }
 
         private void button1_Click(object sender, EventArgs e)
