@@ -61,6 +61,44 @@ namespace OpTiCs
             RowNum = valueArray.GetLength(0);
             ColNum = valueArray.GetLength(1);
 
+
+
+            double[,] matrix = new double[RowNum, ColNum];
+
+            // Normalization
+            for (int j = 0; j < ColNum; j++)
+            {
+
+                double max = 0;
+                double min = 0;
+
+                for (int i = 0; i < RowNum; i++)
+                {
+
+                    double cell = double.Parse(valueArray[i + 1, j + 1].ToString());
+
+                    if (max < cell)
+                    {
+                        max = cell;
+                    }
+
+                    if (min > cell)
+                    {
+                        min = cell;
+                    }
+                }
+
+                for (int i = 0; i < RowNum; i++)
+                {
+
+                    double cell = double.Parse(valueArray[i + 1, j + 1].ToString());
+
+                    matrix[i, j] = (cell - min) / (max - min);
+                }
+
+            }
+
+
             List<List<double>> res = new List<List<double>>();
 
             for (int i = 0; i < RowNum; i++)
@@ -71,10 +109,23 @@ namespace OpTiCs
                 for (int j = 0; j < ColNum; j++)
                 {
 
-                    res[i].Add(double.Parse(valueArray[i + 1, j + 1].ToString()));
+                    res[i].Add(matrix[i, j]);
 
                 }
             }
+
+            /*   for (int i = 0; i < RowNum; i++)
+               {
+
+                   res.Add(new List<double>());
+
+                   for (int j = 0; j < ColNum; j++)
+                   {
+
+                       res[i].Add(double.Parse(valueArray[i + 1, j + 1].ToString()));
+
+                   }
+               }*/
 
             try { workbook.Close(false, Type.Missing, Type.Missing); }
             catch { }
